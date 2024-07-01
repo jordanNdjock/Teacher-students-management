@@ -1,0 +1,27 @@
+Créer un petit gestionnaire des UEs
+- Plateforme de gestion des Ues ou les ens peuvent créer les UEs (code, intitulé), (éditer les cours, publier les cours, les commenter, interagir avec les apprenants à travers les fonctionnalités sociales basiques (forum où les étudiants peuvent poser les questions)
+
+Fonctionnalités à implémenter :
+- Authentification et autorisation : Système de login/register pour les utilisateurs (enseignants et apprenants)
+
+- Utiliser Spring security pour sécuriser l'accès aux fonctionnalités de création, suppression et édition de cours (roles)
+
+- Gestion des cours :
+	- Création du cours
+	- Affichage / lecture
+	- Suppression
+	- Mise à jour des cours par les enseignants
+- Utiliser Spring-data-jpa pour la gestion de la couche de persistence.
+- Gestion des commentaires
+ Donner la possibilité aux apprenants de faire les commentaires sur les cours et afficher les différents commentaires associés à chaque cours
+- Page d'utilisateur : Page prodil utilisateur avec des infofrmations de base telles que : nom, email
+- Lister les cours publiés par chaque enseignant
+- Fonctionnalités sociales basiques
+- Recherche et filtrage (barre de recherche pour trouver les cours basé sur les mots clés)
+- filtrage par catégories
+- Interface utilisateur convivial (tymleaf)
+
+Avoir un backend avec springboot, datajpa pour l'accès aux données, mvc pour les vues, springsecurity pour l'autorisation et l'authentification
+Pour le frontend, utiliser le bootstrap tymleaf
+Pour la bd, ---> mysql
+faire une modélisation
