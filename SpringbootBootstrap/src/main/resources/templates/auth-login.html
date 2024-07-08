@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in - Voler Admin Dashboard</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap.css}">
 
     <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/app.css}">
@@ -24,11 +24,12 @@
                             <h3>Sign In</h3>
                             <p>Please sign in to continue to Voler.</p>
                         </div>
-                        <form th:action="@{/home}" method="post">
+                        <form th:action="@{/loginUser}" method="post" role="form"
+                              th:object="${users}">
                             <div class="form-group position-relative has-icon-left">
-                                <label for="email-id-column">E-Mail</label>
+                                <label for="email">E-Mail</label>
                                 <div class="position-relative">
-                                    <input type="email" id="email-id-column" class="form-control" name="email-id-column">
+                                    <input type="email" id="email" class="form-control" name="email">
                                     <div class="form-control-icon">
                                         <i data-feather="user"></i>
                                     </div>
@@ -39,7 +40,7 @@
                                     <label for="password">Password/Matricule</label>
                                 </div>
                                 <div class="position-relative">
-                                    <input type="password" class="form-control" id="password">
+                                    <input type="password" class="form-control" name="password" id="password">
                                     <div class="form-control-icon">
                                         <i data-feather="lock"></i>
                                     </div>
