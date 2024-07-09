@@ -24,7 +24,7 @@ public class WebConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/admin").hasAuthority("Enseignant")
                         .requestMatchers("/index").hasAuthority("Etudiant")
-                        .requestMatchers("/register", "/saveUser","/home","loginUser").permitAll()
+                        .requestMatchers("/register","/uepage","/addUe", "/saveUser","/home","loginUser").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Permettre l'accès aux ressources statiques
                         .anyRequest().authenticated()
                 )
