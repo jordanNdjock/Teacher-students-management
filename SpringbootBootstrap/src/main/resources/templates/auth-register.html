@@ -9,6 +9,7 @@
 
     <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
 </head>
 
 <body>
@@ -20,27 +21,30 @@
                     <div class="card-body">
                         <div class="text-center mb-5">
                             <img src="/images/favicon.svg" height="48" class='mb-4'>
-                            <h3>Sign Up</h3>
-                            <p>Please fill the form to register.</p>
+                            <h3>S'enregistrer</h3>
+                            <p>Enregistrez vous</p>
                         </div>
                         <form action="/saveUser" method="post"
                               role="form"
                               th:object="${users}">
                             <div class="row">
-                                <div class="col-md-6 col-12">
+                                <div class="col-12">
                                     <div class="form-group">
-                                        <label for="name">Username</label>
+                                        <label for="name">Nom d'utilisateur</label>
                                         <input type="text"  id="name" class="form-control" name="name">
                                     </div>
                                 </div>
                                 <div class="form-group position-relative has-icon-left">
                                     <div class="clearfix">
-                                        <label for="password">Password/Matricule</label>
+                                        <label for="password">Mot de passe/Matricule</label>
                                     </div>
                                     <div class="position-relative">
-                                        <input type="password"  class="form-control" name="password" id="password">
+                                        <input type="password" class="form-control" name="password" id="password">
                                         <div class="form-control-icon">
                                             <i data-feather="lock"></i>
+                                        </div>
+                                        <div class="form-control-icon-right">
+                                            <i data-feather="eye" id="togglePassword"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -54,9 +58,9 @@
                                     <label>Niveau</label>
                                     <fieldset class="form-group" >
                                         <select class="form-select"  required id="niveau" name="niveau" disabled>
-                                            <option>IT</option>
-                                            <option>Blade Runner</option>
-                                            <option>Thor Ragnarok</option>
+                                            <option>Niveau 1</option>
+                                            <option>Niveau 2</option>
+                                            <option>Niveau 3</option>
                                         </select>
                                     </fieldset>
                                 </div>
@@ -83,9 +87,10 @@
                                 </div>
                             </div>
 
-                            <a href="#">Have an account? Login</a>
+                            <a href="/login">Avez vous un compte? Se connecter</a>
+                            <hr class="divider"/>
                             <div class="clearfix">
-                                <button class="btn btn-primary float-right" type="submit">Submit</button>
+                                <button class="btn btn-primary float-right" type="submit">S'enregistrer</button>
                             </div>
                         </form>
                     </div>
@@ -97,7 +102,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-        const niveauSelect = document.getElementById('basicSelect');
+        const niveauSelect = document.getElementById('niveau');
         const roleEtudiant = document.getElementById('custom1');
         const roleEnseignant = document.getElementById('custom2');
 
@@ -115,6 +120,25 @@
 
         // Initialize the state of the select element
         toggleNiveauSelect();
+
+         feather.replace();
+
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function () {
+            // Toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            // Toggle the eye / eye-off icon
+            if (type === 'password') {
+                this.innerHTML = '<i data-feather="eye"></i>';
+            } else {
+                this.innerHTML = '<i data-feather="eye-off"></i>';
+            }
+            feather.replace();
+        });
     });
 </script>
 

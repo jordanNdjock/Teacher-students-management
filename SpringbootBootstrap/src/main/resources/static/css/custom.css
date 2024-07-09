@@ -1,0 +1,11 @@
+     .form-control-icon-right {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .position-relative {
+            position: relative;
+        }

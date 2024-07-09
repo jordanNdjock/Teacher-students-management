@@ -25,7 +25,7 @@ public class WebConfig {
                         .requestMatchers("/admin").hasAuthority("Enseignant")
                         .requestMatchers("/index").hasAuthority("Etudiant")
                         .requestMatchers("/register","/uepage","/addUe", "/saveUser","/home","loginUser").permitAll()
-                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Permettre l'accès aux ressources statiques
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin

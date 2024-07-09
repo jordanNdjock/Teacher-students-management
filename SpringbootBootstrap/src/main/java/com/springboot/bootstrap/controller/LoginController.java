@@ -37,13 +37,13 @@ public class LoginController {
 
     @GetMapping("/uepage")
     public String uepage(){
-        return "/pages/ue_page";
+        return "/pages/ue/ue_page";
     }
     @GetMapping("/ues")
     public String viewUePage(Model model) {
         List<Ue> ues = ueService.getAllUes();
         model.addAttribute("ues", ues);
-        return "pages/ue_page"; // Le nom de votre template Thymeleaf
+        return "pages/ue/ue_page"; // Le nom de votre template Thymeleaf
     }
 
     @PostMapping("/addUe")
@@ -51,7 +51,7 @@ public class LoginController {
         System.out.println("hola " + ue.getNiv() + ue.getUser());
         ueService.saveUe(ue);
         model.addAttribute("message", "Registered Successfuly!");
-        return "/pages/ue_page";
+        return "/pages/ue/ue_page";
     }
     @RequestMapping("/register")
     public String registerPage(){
@@ -84,7 +84,7 @@ public class LoginController {
             if ("Enseignant".equals(users.getRole().getName())) {
                 return "/pages/landing_page";
             } else if ("Etudiant".equals(users.getRole().getName())) {
-                return "/pages/student_page";
+                return "/pages/student/student_page";
             }
         }
 
