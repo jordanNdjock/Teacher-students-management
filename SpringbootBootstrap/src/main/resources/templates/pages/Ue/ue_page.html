@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/dashboard}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/vendors/simple-datatables/style.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="main-content container-fluid" layout:fragment="content">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Enseignant</h3>
+                <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can check the full documentation <a href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                    <ol class="breadcrumb">
+                        <div class="buttons">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Add</a>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="registerModalLabel">Register Form</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/addUe}" id="addUeForm" method="post" role="form"
+                                              th:object="${ue}">
+                                            <div class="form-group">
+                                                <label for="code">Code</label>
+                                                <input type="text" class="form-control" id="code" name="code" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="intitul">Intitulé</label>
+                                                <input type="text" class="form-control" id="intitul" name="intitul" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="niv">Niveau</label>
+                                                <select class="form-control" id="niv" name="niv" required>
+                                                    <option value="Niveau 1">Niveau 1</option>
+                                                    <option value="Niveau 2">Niveau 2</option>
+                                                    <option value="Niveau 3">Niveau 3</option>
+
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Add</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
+            <div class="card-header">
+                Simple Datatable
+            </div>
+            <div class="card-body">
+                <table class='table table-striped' id="ueTable">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Code</th>
+                        <th>Intitulé</th>
+                        <th>Niveau</th>
+
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ue : ${ues}">
+                        <td th:text="${ue.id}"></td>
+                        <td th:text="${ue.code}"></td>
+                        <td th:text="${ue.intitul}"></td>
+                        <td th:text="${ue.niv}"></td>
+                        <td>
+                            <a th:href="@{/delete/{id}(id=${ue.id})}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </section>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#addUeForm').on('submit', function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('#ueTable tbody').empty();
+                    $.each(response.ueList, function(index, ue) {
+                        $('#ueTable tbody').append(
+                            '<tr>' +
+                            '<td>' + ue.code + '</td>' +
+                            '<td>' + ue.intitul + '</td>' +
+                            '<td>' + ue.niv + '</td>' +
+                            '<td>' + ue.user.name + '</td>' +
+                            '</tr>'
+                        );
+                    });
+                },
+                error: function(response) {
+                    alert('Erreur lors de l\'ajout de l\'UE');
+                }
+            });
+        });
+    });
+</script>
+<script th:src="@{/vendors/simple-datatables/simple-datatables.js}"></script>
+<script th:src="@{/js/vendors.js}"></script>
+</body>
+</html>
