@@ -57,17 +57,29 @@ public class LoginController {
 
     /*  Page d'accueil affichant l'ensemble des Ue  */
     @GetMapping("/uepage")
+<<<<<<< HEAD
+=======
+    public String uepage(){
+        return "/pages/ue/ue_page";
+    }
+    @GetMapping("/ues")
+>>>>>>> cf6c0efe365ba89714678bf01ddcbb1d5b33075c
     public String viewUePage(Model model) {
         List<Ue> ues = ueService.getAllUes();
         System.out.println("Liste des Ue " + ues);
         model.addAttribute("ues", ues);
+<<<<<<< HEAD
         return "pages/Ue/ue_page"; // Le nom de votre template Thymeleaf
+=======
+        return "pages/ue/ue_page"; // Le nom de votre template Thymeleaf
+>>>>>>> cf6c0efe365ba89714678bf01ddcbb1d5b33075c
     }
 
     /* Récupération de l'ensemble des Ue*/
 
     /* Ajout d'une Ue*/
     @PostMapping("/addUe")
+<<<<<<< HEAD
     public  String addU(@ModelAttribute("ue") Ue ue,HttpSession session, Model model){
         Users currentUser = (Users) session.getAttribute("user");
 
@@ -87,6 +99,13 @@ public class LoginController {
         ueService.saveUe(ues);
         model.addAttribute("ues", ueService.getAllUes());
         return "/pages/Ue/ue_page";
+=======
+    public  String addU(@ModelAttribute("ue") Ue ue, Model model){
+        System.out.println("hola " + ue.getNiv() + ue.getUser());
+        ueService.saveUe(ue);
+        model.addAttribute("message", "Registered Successfuly!");
+        return "/pages/ue/ue_page";
+>>>>>>> cf6c0efe365ba89714678bf01ddcbb1d5b33075c
     }
 
     /*  Delete Ue*/

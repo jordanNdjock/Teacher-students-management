@@ -24,7 +24,7 @@ public class UserService {
 
         Users users;
         users = new Users( user.getName(),user.getEmail(), passwordEncoder.encode(user.getPassword()),user.getNiveau(),user.getRole());
-
+        System.out.println("Welcome toi" +users);
         userRepository.save(users);
 
     }
