@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/dashboard}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/vendors/quill/quill.bubble.css}">
+    <link rel="stylesheet" th:href="@{/vendors/quill/quill.snow.css}">
+</head>
+<body>
+<div class="main-content container-fluid" layout:fragment="content">
+    <div class="main-content container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Gestion des cours</h3>
+                    <p class="text-subtitle text-muted">Simple Textarea  </p>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Gestion de cours</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div th:if="${message}" class="alert alert-success" role="alert">
+                        <p th:text="${message}"></p>
+                    </div>
+                    <div th:if="${error}" class="alert alert-danger" role="alert">
+                        <p th:text="${error}"></p>
+                    </div>
+                    <div class="card-header">
+                        <h4>Formulaire </h4>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/cours/add}"  enctype="multipart/form-data" method="post" role="form"
+                              th:object="${cours}">
+                            <div class="form-group row mb-4">
+                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                                <div class="col-sm-12 col-md-7">
+                                    <input type="text" class="form-control" name="title" id="title">
+                                </div>
+                            </div>
+                            <div class="form-group row mb-4">
+                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Catégorie</label>
+                                <div class="col-sm-12 col-md-7">
+                                    <select class="form-control selectric" name="category" id="category">
+                                        <option value="" disabled selected>Choisissez une catégorie</option>
+                                        <option th:each="category : ${categories}"
+                                                th:value="${category.id}"
+                                                th:text="${category.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-4">
+                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Unités d'enseignements</label>
+                                <div class="col-sm-12 col-md-7">
+                                    <select class="form-control selectric" name="ue" id="ue">
+                                        <option value="" disabled selected>Choisissez une Unité</option>
+                                        <option th:each="ue : ${ues}"
+                                                th:value="${ue.id}"
+                                                th:text="${ue.code}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="file" class="form-label">Fichier de cours</label>
+                                <input class="form-control"name="file" type="file" id="file" multiple>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                            </div>
+                            <div class="form-group row mb-4">
+                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                <div class="col-sm-12 col-md-7">
+                                    <input class="btn btn-primary" type="submit" value="Sauvegarder">
+
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</script>
+</body>
+</html>

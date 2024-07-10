@@ -9,8 +9,6 @@
 
     <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/app.css}">
-    <link rel="stylesheet" th:href="@{/css/custom.css}">
-
 </head>
 
 <body>
@@ -23,8 +21,8 @@
                     <div class="card-body">
                         <div class="text-center mb-5">
                             <img th:src="@{/images/favicon.svg}" height="48" class='mb-4'>
-                            <h3>Se Connecter</h3>
-                            <p>Connectez vous </p>
+                            <h3>Sign In</h3>
+                            <p>Please sign in to continue to Voler.</p>
                         </div>
                         <form th:action="@{/loginUser}" method="post" role="form"
                               th:object="${users}">
@@ -39,15 +37,12 @@
                             </div>
                             <div class="form-group position-relative has-icon-left">
                                 <div class="clearfix">
-                                    <label for="password">Mot de passe/Matricule</label>
+                                    <label for="password">Password/Matricule</label>
                                 </div>
                                 <div class="position-relative">
                                     <input type="password" class="form-control" name="password" id="password">
                                     <div class="form-control-icon">
                                         <i data-feather="lock"></i>
-                                    </div>
-                                    <div class="form-control-icon-right">
-                                        <i data-feather="eye" id="togglePassword"></i>
                                     </div>
                                 </div>
                             </div>
@@ -55,14 +50,14 @@
                             <div class='form-check clearfix my-4'>
                                 <div class="checkbox float-start">
                                     <input type="checkbox" id="checkbox1" class='form-check-input'>
-                                    <label for="checkbox1">Se rappeler de moi</label>
+                                    <label for="checkbox1">Remember me</label>
                                 </div>
                                 <div class="float-end">
-                                    <a href="/register">Vous n'avez pas de compte?</a>
+                                    <a href="/register">Don't have an account?</a>
                                 </div>
                             </div>
                             <div class="clearfix">
-                                <button class="btn btn-primary float-end" type="submit">Connexion</button>
+                                <button class="btn btn-primary float-end" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -76,28 +71,6 @@
 <script th:src="@{/js/app.js}"></script>
 
 <script th:src="@{/js/main.js}"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        feather.replace();
-
-        const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('#password');
-
-        togglePassword.addEventListener('click', function () {
-            // Toggle the type attribute
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-
-            // Toggle the eye / eye-off icon
-            if (type === 'password') {
-                this.innerHTML = '<i data-feather="eye"></i>';
-            } else {
-                this.innerHTML = '<i data-feather="eye-off"></i>';
-            }
-            feather.replace();
-        });
-    });
-</script>
 </body>
 
 </html>

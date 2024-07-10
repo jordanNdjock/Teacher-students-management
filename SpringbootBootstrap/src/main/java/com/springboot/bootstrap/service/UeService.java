@@ -18,12 +18,21 @@ public class UeService {
     private PasswordEncoder passwordEncoder;
 
     public void saveUe(Ue ue) {
-
-       Ue ues = new  Ue(ue.getCode(),ue.getIntitul(),ue.getNiv(),ue.getUser());
-        ueRepository.save(ues);
+        ueRepository.save(ue);
     }
-
+    public Ue getUeById(Long id) {
+        return ueRepository.findById(id).orElse(null);
+    }
     public List<Ue> getAllUes() {
-        return ueRepository.findAll();
+        return (List<Ue>) ueRepository.findAll();
     }
+
+    public boolean existsByUserAndNiv(Users user, String niv) {
+        return ueRepository.existsByUserAndNiv(user, niv);
+    }
+
+    public void deleteById(Long id) {
+        ueRepository.deleteById(id);
+    }
+
 }
