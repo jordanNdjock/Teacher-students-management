@@ -6,10 +6,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.springboot.bootstrap.model.*;
 import com.springboot.bootstrap.repositories.UeRepository;
-import com.springboot.bootstrap.service.CategoryService;
-import com.springboot.bootstrap.service.CoursService;
-import com.springboot.bootstrap.service.UeService;
-import com.springboot.bootstrap.service.UserService;
+import com.springboot.bootstrap.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +33,9 @@ public class LoginController {
 
     @Autowired
     private UeService ueService;
+
+    @Autowired
+    private CoursFileService coursFileService;
 
     @Autowired
     private CategoryService categoryService;
@@ -158,14 +158,45 @@ public class LoginController {
         model.addAttribute("ues", ues);
         return "/pages/cours/cour";
     }
-    
+
     @PostMapping("/cours/add")
+    public String addCours(@RequestParam("file") MultipartFile file,
+                           @ModelAttribute("cours") Cours cours,
+                           RedirectAttributes redirectAttributes) {
 
-    public String registerUser(@ModelAttribute("cours") Cours cour, Model model, @RequestParam("file") MultipartFile file) {
+        try {
+            System.out.println("tu es ce fichier" + file);
+            // Assurez-vous que le fichier n'est pas vide
+            if (file.isEmpty()) {
+                redirectAttributes.addFlashAttribute("error", "Le fichier est vide !");
+                return "/pages/cours/cour";
+            }
 
-        coursService.saveCours(cour);
-        model.addAttribute("message", "Registered Successfuly!");
+            // Récupérer les objets Ue et Category à partir des IDs
+            Ue ue = ueService.getUeById(cours.getUe().getId());
+            Category category = categoryService.getCategoryById(cours.getCategory().getId());
+
+            if (ue != null && category != null) {
+                cours.setUe(ue);
+                cours.setCategory(category);
+
+                Cours savedCours = coursService.saveCours(cours);
+
+                // Sauvegarder le fichier
+                CoursFile coursFile = new CoursFile(file.getBytes(), savedCours);
+                coursFileService.saveCoursFile(coursFile);
+
+                redirectAttributes.addFlashAttribute("message", "Cours ajouté avec succès !");
+            } else {
+                redirectAttributes.addFlashAttribute("error", "Erreur lors de l'ajout du cours !");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "Erreur lors de l'ajout du cours !");
+        }
+
         return "/pages/cours/cour";
     }
+
 }
 

@@ -30,13 +30,17 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
-
+                    <div th:if="${message}" class="alert alert-success" role="alert">
+                        <p th:text="${message}"></p>
+                    </div>
+                    <div th:if="${error}" class="alert alert-danger" role="alert">
+                        <p th:text="${error}"></p>
+                    </div>
                     <div class="card-header">
                         <h4>Formulaire </h4>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/cours/add}"  method="post" role="form"
+                        <form th:action="@{/cours/add}"  enctype="multipart/form-data" method="post" role="form"
                               th:object="${cours}">
                             <div class="form-group row mb-4">
                                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>

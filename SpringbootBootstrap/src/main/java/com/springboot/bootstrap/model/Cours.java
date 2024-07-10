@@ -15,9 +15,6 @@ public class Cours {
     @Column(nullable = false)
     private String description;
 
-    @Lob
-    private byte[] file;
-
     @ManyToOne
     @JoinColumn(name = "ue_id", nullable = false)
     private Ue ue;
@@ -31,10 +28,9 @@ public class Cours {
     public Cours() {
     }
 
-    public Cours(String title, String description, byte[] file, Ue ue, Category category) {
+    public Cours(String title, String description, Ue ue, Category category) {
         this.title = title;
         this.description = description;
-        this.file = file;
         this.ue = ue;
         this.category = category;
     }
@@ -54,14 +50,6 @@ public class Cours {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public byte[] getFile() {
-        return file;
-    }
-
-    public void setFile(byte[] file) {
-        this.file = file;
     }
 
     public Ue getUe() {
@@ -87,5 +75,6 @@ public class Cours {
     public void setTitle(String title) {
         this.title = title;
     }
+
     // Getters, setters, and constructors
 }

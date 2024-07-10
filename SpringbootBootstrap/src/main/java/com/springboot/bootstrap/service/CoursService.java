@@ -25,7 +25,7 @@ public class CoursService {
     }
 
     public Cours saveCours(Cours cours) {
-        return coursRepository.save(cours);
+       return coursRepository.save(cours);
     }
 
     public void deleteCours(Long id) {
