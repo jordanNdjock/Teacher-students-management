@@ -24,13 +24,8 @@ public class WebConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/admin").hasAuthority("Enseignant")
                         .requestMatchers("/index").hasAuthority("Etudiant")
-<<<<<<< HEAD
                         .requestMatchers("/register","/cours/add","/uploadImage","/categorieHome","/logout","/delete/{id}","/uepage","/addUe","/listeues", "/saveUser","/home","loginUser").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // Permettre l'accès aux ressources statiques
-=======
-                        .requestMatchers("/register","/uepage","/addUe", "/saveUser","/home","loginUser").permitAll()
-                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
->>>>>>> cf6c0efe365ba89714678bf01ddcbb1d5b33075c
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
