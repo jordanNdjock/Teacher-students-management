@@ -24,7 +24,7 @@ public class WebConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/admin").hasAuthority("Enseignant")
                         .requestMatchers("/index").hasAuthority("Etudiant")
-                        .requestMatchers("/register","/uepage","/addUe", "/saveUser","/home","loginUser").permitAll()
+                        .requestMatchers("/register","/uepage","/addUe", "/saveUser","/home","/loginUser","/student","/profil").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )

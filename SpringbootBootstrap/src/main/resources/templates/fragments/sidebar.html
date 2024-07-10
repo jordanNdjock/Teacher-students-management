@@ -14,7 +14,7 @@
             <ul class="menu">
 
 
-                <li class='sidebar-title'>Main Menu</li>
+                <li class='sidebar-title'>Accueil</li>
 
 
 
@@ -26,16 +26,14 @@
 
                 </li>
 
-
-                <li class="sidebar-item  ">
+                <li class="sidebar-item" th:if="${role == 'Enseignant'}">
                     <a href="/uepage" class='sidebar-link'>
-                        <i data-feather="home" width="20"></i>
-                        <span>Gstion des Ue</span>
+                        <i data-feather="book" width="20"></i>
+                        <span>Gestion des Ue</span>
                     </a>
-
                 </li>
 
-                <li class='sidebar-title'>Pages</li>
+                <!--<li class='sidebar-title'>Pages</li>
 
 
                 <li class="sidebar-item  has-sub">
@@ -47,12 +45,13 @@
                     <ul class="submenu ">
 
                         <li>
-                            <a href="auth-login.html">LogOut</a>
+                            <a href="/logout">LogOut</a>
                         </li>
 
                     </ul>
 
                 </li>
+                -->
 
 
 

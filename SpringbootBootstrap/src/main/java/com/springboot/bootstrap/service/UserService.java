@@ -39,4 +39,9 @@ public class UserService {
     public Role findRoleByName(String roleName) {
         return roleRepository.findByName(roleName);
     }
+
+
+    public Users findByEmail(String email) {
+        return userRepository.findByEmail(email); // Assuming you have a UserRepository with findByEmail method
+    }
 }

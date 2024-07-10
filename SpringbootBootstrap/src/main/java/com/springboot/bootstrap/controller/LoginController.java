@@ -59,8 +59,16 @@ public class LoginController {
     }
 
     @RequestMapping("/home")
-    public String loginSubmit(){
-        return "/pages/landing_page";
+    public String home(HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+
+        if (user != null && user.getRole().getName().equals("Etudiant")) {
+            model.addAttribute("user", user);
+            return "pages/student/student_page";
+        } else {
+            model.addAttribute("user", user);
+            return "pages/landing_page";
+        }
     }
 
     @PostMapping("/saveUser")
@@ -92,10 +100,11 @@ public class LoginController {
         return "login";
     }
 
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.invalidate(); // Invalider la session
-        return "login"; // Rediriger vers la page de login
+        session.invalidate();
+        return "login";
     }
 
 }
